@@ -1,0 +1,29 @@
+1. 路由文件中配置
+    {
+        path: "home/:id",
+        component: DetailComponent
+    }
+    
+2. 连接到这个界面
+    <div class="row">
+        <div class="col-sm-4 col-xs-12" *ngFor="let item of firstName">
+            <div class="well text-center">
+                <a routerLink="/home/{{item.id}}" class="large">{{item.name}}</a>
+            </div>
+        </div>
+    </div>
+    
+3. 这个界面对应的组件中h获取参数
+import {Component} from "@angular/core";
+// 引入选中的路由模块支持
+import { ActivatedRoute } from '@angular/router';
+@Component({
+    selector: "my-detail",
+    templateUrl: "app/templates/detail.html"
+})
+export class DetailComponent {
+    constructor(private route: ActivatedRoute) {};
+    name = "通过id获取的详细信息";
+    // 获取URL里面的参数
+    paramsId = this.route.snapshot.params.id;
+}
